@@ -24,6 +24,10 @@ class LearnContainer extends StatelessWidget {
           ),
         ],
       ),
+      child: Align(
+        alignment: Alignment.bottomRight,
+        child: Icon(Icons.star, size: 50, color: Colors.orange),
+      ),
     );
   }
 }
