@@ -75,8 +75,11 @@ class Test03 extends StatelessWidget {
                 color: Colors.red[100],
                 boxShadow: const [BoxShadow(color: Colors.black, offset: Offset(10, 10))]
               ),
-              child: ListView.builder(
+              child: ListView.separated(
                 itemCount: 50,
+                separatorBuilder: (context, index){
+                  return const Divider(height: 1,);
+                },
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text("$index"),
