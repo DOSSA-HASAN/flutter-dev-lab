@@ -18,10 +18,15 @@ class ReLearnListsAndGrids extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) => Container(
                 decoration: BoxDecoration(
-                  color: Colors.blueGrey,
+                  color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: Center(child: Text("Grid Item $index")),
+                child: Center(
+                  child: Text(
+                    "Grid Item $index",
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                ),
               ),
               childCount: 20,
             ),
@@ -32,7 +37,7 @@ class ReLearnListsAndGrids extends StatelessWidget {
                 leading: Icon(Icons.list),
                 title: Text("SliverList $index"),
               ),
-              childCount: 21
+              childCount: 21,
             ),
           ),
         ],
