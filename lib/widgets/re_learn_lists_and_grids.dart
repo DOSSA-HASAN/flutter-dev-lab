@@ -26,6 +26,15 @@ class ReLearnListsAndGrids extends StatelessWidget {
               childCount: 20,
             ),
           ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => ListTile(
+                leading: Icon(Icons.list),
+                title: Text("SliverList $index"),
+              ),
+              childCount: 21
+            ),
+          ),
         ],
       ),
 
