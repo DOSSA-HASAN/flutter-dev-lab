@@ -5,6 +5,8 @@ class Test04 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     return Scaffold(
         body: CustomScrollView(
           slivers: [
@@ -32,10 +34,10 @@ class Test04 extends StatelessWidget {
                     width: (MediaQuery.of(context).size.width / 5),
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: theme.colorScheme.secondary,
                         style: BorderStyle.solid,
                       ),
-                      color: Theme.of(context).primaryColor,
+                      color: colorScheme.primary,
                     ),
                     child: Center(child: Text('$index')),
                   ),
@@ -60,8 +62,8 @@ class Test04 extends StatelessWidget {
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) => ListTile(
-                  tileColor: Theme.of(context).colorScheme.secondary,
-                  title: Text("Recomended Apps"),
+                  tileColor: colorScheme.secondary,
+                  title: Text("Recomended Apps", style: TextStyle(color:colorScheme.primary),),
                 ),
                 childCount: 20,
               ),
