@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dev_lab/widgets/like_button.dart';
 
 class Test04 extends StatelessWidget {
   const Test04({super.key});
@@ -68,6 +69,7 @@ class Test04 extends StatelessWidget {
                 childCount: 20,
               ),
             ),
+            SliverToBoxAdapter(child: LikeButton(),)
           ],
         ),
     );
