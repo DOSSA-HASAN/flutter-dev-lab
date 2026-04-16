@@ -10,6 +10,26 @@ class Test04 extends StatefulWidget {
 
 class _Test04State extends State<Test04> {
   int _clickCount = 0;
+  late TextEditingController _searchController;
+  String _displayText = "Search for something...";
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _updateSearch() {
+    setState(() {
+      _displayText = _searchController.text;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,31 +38,42 @@ class _Test04State extends State<Test04> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            actions: [
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    ++_clickCount;
-                    print(_clickCount);
-                  });
-                },
-                icon: Icon(Icons.add, color: Colors.red),
-              ),
-            ],
+          // SliverAppBar(
+          //   actions: [
+          //     IconButton(
+          //       onPressed: () {
+          //         setState(() {
+          //           ++_clickCount;
+          //           print(_clickCount);
+          //         });
+          //       },
+          //       icon: Icon(Icons.add, color: Colors.red),
+          //     ),
+          //   ],
+          //   pinned: true,
+          //   expandedHeight: 250,
+          //   backgroundColor: Theme.of(context).colorScheme.primary,
+          //   flexibleSpace: FlexibleSpaceBar(title: Text("Apps Clicked $_clickCount")),
+          // ),
+          SliverPersistentHeader(
             pinned: true,
-            expandedHeight: 250,
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            flexibleSpace: FlexibleSpaceBar(title: Text("Apps Clicked $_clickCount")),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.all(10),
-              child: TextField(
-                decoration: InputDecoration(border: OutlineInputBorder()),
+            delegate: MySearchDelegate(
+              child: Container(
+                color: colorScheme.surface,
+                padding: EdgeInsets.all(10),
+                height: 100,
+                child: Center(
+                  child: TextField(
+                    controller: _searchController,
+                    onChanged: (value) => _updateSearch(),
+                  ),
+                ),
               ),
             ),
           ),
+          // SliverToBoxAdapter(
+          //   child: Padding(padding: EdgeInsets.all(10), child: TextField()),
+          // ),
           SliverToBoxAdapter(
             child: SizedBox(
               height: 180,
@@ -94,5 +125,32 @@ class _Test04State extends State<Test04> {
         ],
       ),
     );
+  }
+}
+
+class MySearchDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+  final double height;
+
+  MySearchDelegate({required this.child, this.height = 100});
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Material(elevation: overlapsContent ? 4 : 0, child: child);
+  }
+
+  @override
+  double get maxExtent => height;
+
+  @override
+  double get minExtent => height;
+
+  @override
+  bool shouldRebuild(covariant MySearchDelegate oldDelegate) {
+    return oldDelegate.child != child;
   }
 }
