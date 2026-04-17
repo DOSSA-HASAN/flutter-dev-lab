@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dev_lab/widgets/details_screen.dart';
+import 'package:flutter_dev_lab/widgets/learn_expanded.dart';
 import 'package:flutter_dev_lab/widgets/like_button.dart';
 
 class Test04 extends StatefulWidget {
@@ -113,10 +115,20 @@ class _Test04State extends State<Test04> {
             delegate: SliverChildBuilderDelegate(
               (context, index) => ListTile(
                 tileColor: colorScheme.secondary,
-                title: Text(
-                  "Recomended Apps",
-                  style: TextStyle(color: colorScheme.primary),
+                title: Hero(
+                  tag: 'app-icon-$index',
+                  child: Icon(Icons.apps, size: 50),
                 ),
+                // Text(
+                //   "Recomended Apps",
+                //   style: TextStyle(color: colorScheme.primary),
+                // ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DetailsScreen(appName: index, index: index)),
+                  );
+                },
               ),
               childCount: 20,
             ),
