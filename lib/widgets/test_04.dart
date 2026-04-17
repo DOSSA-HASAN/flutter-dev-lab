@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dev_lab/models/app_model.dart';
 import 'package:flutter_dev_lab/widgets/details_screen.dart';
 import 'package:flutter_dev_lab/widgets/learn_expanded.dart';
 import 'package:flutter_dev_lab/widgets/like_button.dart';
@@ -116,17 +117,31 @@ class _Test04State extends State<Test04> {
               (context, index) => ListTile(
                 tileColor: colorScheme.secondary,
                 title: Hero(
-                  tag: 'app-icon-$index',
-                  child: Icon(Icons.apps, size: 50),
+                  tag: 'App Number - $index',
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('App Number - $index'),
+                      Icon(Icons.apps, size: 50),
+                    ],
+                  ),
                 ),
                 // Text(
                 //   "Recomended Apps",
                 //   style: TextStyle(color: colorScheme.primary),
                 // ),
                 onTap: () {
+                  final selectedApp = AppModel(
+                    name: "App Number - $index",
+                    category: "Education",
+                    themeColor: Colors.pink,
+                  );
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DetailsScreen(appName: index, index: index)),
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          DetailsScreen(appDetails: selectedApp),
+                    ),
                   );
                 },
               ),
