@@ -35,6 +35,14 @@ class AppTheme {
       textTheme: TextTheme(
         headlineMedium: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         bodyLarge: TextStyle(fontSize: 16, color: Colors.black54)
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: _lightColorScheme.surfaceVariant.withOpacity(0.3),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none
+        ),
       )
     );
   }
